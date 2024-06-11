@@ -93,14 +93,14 @@ class ModifyPayload:
             encoded_payload = payload.replace("data:", "data:text/plain;base64,")
             encoded_payload = encoded_payload.encode("base64").decode()
             new_payloads.append(encoded_payload)
-        return new_payloads '''
+        return new_payloads 
     
     def encode_data_protocol(self, payloads):
         # Encode data with Base64
         encoded_data = base64.b64encode(payloads.encode()).decode()
         # Construct the data URL
         data_url = f"data:text/plain;base64,{encoded_data}"
-        return data_url
+        return data_url ''' 
 
     def remove_quotation_marks(self, payloads):
         new_payloads = []
@@ -211,7 +211,6 @@ ACTION_TABLE = {
     "add_space_to_javascript": "add_space_to_javascript",
     "add_string_after_script": "add_string_after_script",
     "replace_parentheses_with_grave_note": "replace_parentheses_with_grave_note",
-    "encode_data_protocol": "encode_data_protocol",
     "remove_quotation_marks": "remove_quotation_marks",
     # "unicode_encode_javascript": "unicode_encode_javascript",
     "html_entity_encode_javascript": "html_entity_encode_javascript",
