@@ -34,5 +34,11 @@ deactivate
 ```
 pip install -r requirements.txt
 ```
+#### Step 6: Train PPO agent
+```
+python3 PPO.py
+```
 #### Step 6: Generate adversarial examples.
-Run file generate_examples.ipynb
+```
+python3 xss_mutated.py
+```
