@@ -90,14 +90,22 @@ with open('/home/vlum/ML/DACN/reinforce/dataset/portswigger.txt', 'r') as file:
 # Initialize the environment with the payloads from the file
 env = XSSMutationEnv(payloads)
 
-# Check the environment
-check_env(env, warn=True)
+# Load the trained PPO agent
+trained_model = PPO.load("ppo_xss_mutation_test.zip")
 
-# Initialize the PPO agent with MlpPolicy
-model = PPO('MlpPolicy', env, verbose=1)
+# Use the agent to generate payloads
+obs, _ = env.reset()
+done = False
+generated_payloads = []
 
-# Train the PPO agent
-model.learn(total_timesteps=10000)
+while not done:
+    # Directly use the dictionary observation
+    action, _states = trained_model.predict(obs.astype(np.int32))
+    obs, reward, terminated, truncated, info = env.step(action)
+    done = terminated or truncated
+    generated_payloads.append(env.payloads[env.current_payload_index])
 
-# Save the trained model
-model.save("ppo_xss_mutation_test")
+print("Generated Payloads:")
+for payload in generated_payloads:
+    print(payload)
+
